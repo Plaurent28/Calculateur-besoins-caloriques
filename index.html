@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            padding: 20px;
+        }
+        .calculator {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+        }
+        .section {
+            background: #111;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .section-title {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        .radio-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        .radio-option {
+            background: #1a1a1a;
+            padding: 12px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            border: 1px solid #333;
+            transition: all 0.3s ease;
+            text-align: center;
+            min-width: 100px;
+        }
+        .radio-option.active {
+            background: #161616;
+            border-color: #4169e1;
+        }
+        .input-group {
+            margin-bottom: 20px;
+        }
+        .input-group label {
+            display: block;
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+        .input-group input {
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid #333;
+            color: #fff;
+            font-size: 24px;
+            width: 200px;
+            padding: 5px 0;
+        }
+        .input-group select {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            color: #fff;
+            font-size: 16px;
+            padding: 10px;
+            width: 220px;
+            border-radius: 6px;
+            appearance: none;
+        }
+        .input-group .unit {
+            color: #666;
+            font-size: 12px;
+            margin-top: 4px;
+        }
+        .macro-card {
+            background: #1a1a1a;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        .macro-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .macro-title {
+            font-size: 16px;
+            color: #4169e1;
+        }
+        .macro-value {
+            font-size: 24px;
+            color: #fff;
+        }
+        .macro-bar {
+            height: 8px;
+            background: #222;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+        .macro-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+        .protein { background: #4169e1; }
+        .carbs { background: #4caf50; }
+        .fats { background: #ffc107; }
+
+        .result-card {
+            background: #1a1a1a;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .result-label {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        .result-value {
+            font-size: 42px;
+            color: #4169e1;
+            font-weight: 300;
+        }
+        .result-unit {
+            font-size: 16px;
+            color: #666;
+            margin-left: 5px;
+        }
+        .meal-suggestion {
+            background: #1a1a1a;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        .meal-title {
+            color: #4169e1;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        .meal-content {
+            color: #888;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        .meal-macros {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+            font-size: 12px;
+            color: #666;
+        }
+        .meal-macro {
+            display: flex;
+            align-items: center;
+        }
+        .macro-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-right: 5px;
+        }
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <div class="section">
+            <div class="section-title">Profil personnel</div>
+            
+            <div class="radio-group">
+                <div class="radio-option active" onclick="selectGender('M')" data-gender="M">Homme</div>
+                <div class="radio-option" onclick="selectGender('F')" data-gender="F">Femme</div>
+            </div>
+
+            <div class="input-group">
+                <label>Âge</label>
+                <input type="number" id="age" value="30">
+                <div class="unit">ANS</div>
+            </div>
+
+            <div class="input-group">
+                <label>Taille</label>
+                <input type="number" id="height" value="170">
+                <div class="unit">CM</div>
+            </div>
+
+            <div class="input-group">
+                <label>Poids</label>
+                <input type="number" id="weight" value="70">
+                <div class="unit">KG</div>
+            </div>
+
+            <div class="input-group">
+                <label>Niveau d'activité</label>
+                <select id="activity">
+                    <option value="1.2">Sédentaire (peu ou pas d'exercice)</option>
+                    <option value="1.375">Légèrement actif (1-3x/semaine)</option>
+                    <option value="1.55" selected>Modérément actif (3-5x/semaine)</option>
+                    <option value="1.725">Très actif (6-7x/semaine)</option>
+                    <option value="1.9">Athlète (2x/jour)</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">Objectif</div>
+            
+            <div class="radio-group">
+                <div class="radio-option active" onclick="selectGoal('maintain')" data-goal="maintain">
+                    Maintien
+                </div>
+                <div class="radio-option" onclick="selectGoal('lose')" data-goal="lose">
+                    Perte de poids
+                </div>
+                <div class="radio-option" onclick="selectGoal('gain')" data-goal="gain">
+                    Prise de masse
+                </div>
+            </div>
+
+            <div class="result-card">
+                <div class="result-label">Calories quotidiennes</div>
+                <div class="result-value">
+                    <span id="dailyCalories">2500</span>
+                    <span class="result-unit">kcal</span>
+                </div>
+            </div>
+
+            <div class="macro-card">
+                <div class="macro-header">
+                    <div class="macro-title">Protéines</div>
+                    <div class="macro-value"><span id="proteins">140</span>g</div>
+                </div>
+                <div class="macro-bar">
+                    <div class="macro-fill protein" id="proteinBar" style="width: 30%"></div>
+                </div>
+            </div>
+
+            <div class="macro-card">
+                <div class="macro-header">
+                    <div class="macro-title">Glucides</div>
+                    <div class="macro-value"><span id="carbs">312</span>g</div>
+                </div>
+                <div class="macro-bar">
+                    <div class="macro-fill carbs" id="carbsBar" style="width: 50%"></div>
+                </div>
+            </div>
+
+            <div class="macro-card">
+                <div class="macro-header">
+                    <div class="macro-title">Lipides</div>
+                    <div class="macro-value"><span id="fats">55</span>g</div>
+                </div>
+                <div class="macro-bar">
+                    <div class="macro-fill fats" id="fatsBar" style="width: 20%"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">Suggestions de repas</div>
+            
+            <div class="meal-suggestion">
+                <div class="meal-title">Petit déjeuner (625 kcal)</div>
+                <div class="meal-content">
+                    Porridge d'avoine aux fruits rouges avec graines de chia
+                    et amandes, accompagné d'un yaourt grec
+                </div>
+                <div class="meal-macros">
+                    <div class="meal-macro">
+                        <div class="macro-dot protein"></div>
+                        25g P
+                    </div>
+                    <div class="meal-macro">
+                        <div class="macro-dot carbs"></div>
+                        78g G
+                    </div>
+                    <div class="meal-macro">
+                        <div class="macro-dot fats"></div>
+                        14g L
+                    </div>
+                </div>
+            </div>
+
+            <div class="meal-suggestion">
+                <div class="meal-title">Déjeuner (750 kcal)</div>
+                <div class="meal-content">
+                    Poulet grillé avec quinoa et légumes rôtis,
+                    sauce à base d'huile d'olive et citron
+                </div>
+                <div class="meal-macros">
+                    <div class="meal-macro">
+                        <div class="macro-dot protein"></div>
+                        45g P
+                    </div>
+                    <div class="meal-macro">
+                        <div class="macro-dot carbs"></div>
+                        85g G
+                    </div>
+                    <div class="meal-macro">
+                        <div class="macro-dot fats"></div>
+                        18g L
+                    </div>
+                </div>
+            </div>
+
+            <div class="meal-suggestion">
+                <div class="meal-title">Dîner (625 kcal)</div>
+                <div class="meal-content">
+                    Saumon au four avec patates douces et épinards,
+                    assaisonnement aux herbes
+                </div>
+                <div class="meal-macros">
+                    <div class="meal-macro">
+                        <div class="macro-dot protein"></div>
+                        35g P
+                    </div>
+                    <div class="meal-macro">
+                        <div class="macro-dot carbs"></div>
+                        65g G
+                    </div>
+                    <div class="meal-macro">
+                        <div class="macro-dot fats"></div>
+                        15g L
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">Répartition des collations</div>
+            
+            <div class="meal-suggestion">
+                <div class="meal-title">Collation matin (250 kcal)</div>
+                <div class="meal-content">
+                    Smoothie protéiné banane-beurre de cacahuète
+                </div>
+                <div class="meal-macros">
+                    <div class="meal-macro">
+                        <div class="macro-dot protein"></div>
+                        15g P
+                    </div>
+                    <div class="meal-macro">
+                        <div class="macro-dot carbs"></div>
+                        35g G
+                    </div>
+                    <div class="meal-macro">
+                        <div class="macro-dot fats"></div>
+                        8g L
+                    </div>
+                </div>
+            </div>
+
+            <div class="meal-suggestion">
+                <div class="meal-title">Collation après-midi (250 kcal)</div>
+                <div class="meal-content">
+                    Yaourt grec avec fruits secs et miel
+                </div>
+                <div class="meal-macros">
+                    <div class="meal-macro">
+                        <div class="macro-dot protein"></div>
+                        20g P
+                    </div>
+                    <div class="meal-macro">
+                        <div class="macro-dot carbs"></div>
+                        30g G
+                    </div>
+                    <div class="meal-macro">
+                        <div class="macro-dot fats"></div>
+                        7g L
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentGender = 'M';
+        let currentGoal = 'maintain';
+
+        function selectGender(gender) {
+            currentGender = gender;
+            document.querySelectorAll('[data-gender]').forEach(option => {
+                option.classList.remove('active');
+            });
+            document.querySelector(`[data-gender="${gender}"]`).classList.add('active');
+            calculateCalories();
+        }
+
+        function selectGoal(goal) {
+            currentGoal = goal;
+            document.querySelectorAll('[data-goal]').forEach(option => {
+                option.classList.remove('active');
+            });
+            document.querySelector(`[data-goal="${goal}"]`).classList.add('active');
+            calculateCalories();
+        }
+
+        function calculateBMR(weight, height, age, gender) {
+            if (gender === 'M') {
+                return 88.362 + (13.397 * weight) + (4.799 * height) - (5.677 * age);
+            } else {
+                return 447.593 + (9.247 * weight) + (3.098 * height) - (4.330 * age);
+            }
+        }
+
+        function calculateCalories() {
+            const weight = parseFloat(document.getElementById('weight').value) || 70;
+            const height = parseFloat(document.getElementById('height').value) || 170;
+            
