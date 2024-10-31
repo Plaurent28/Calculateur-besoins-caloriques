@@ -31,7 +31,6 @@
             display: flex;
             gap: 10px;
             margin-bottom: 20px;
-            flex-wrap: wrap;
         }
         .radio-option {
             background: #1a1a1a;
@@ -40,8 +39,13 @@
             cursor: pointer;
             border: 1px solid #333;
             transition: all 0.3s ease;
+            color: #fff;
+            font-size: 14px;
+            min-width: 120px;
             text-align: center;
-            min-width: 100px;
+        }
+        .radio-option:hover {
+            border-color: #4169e1;
         }
         .radio-option.active {
             background: #161616;
@@ -138,39 +142,6 @@
             color: #666;
             margin-left: 5px;
         }
-        .meal-suggestion {
-            background: #1a1a1a;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 15px;
-        }
-        .meal-title {
-            color: #4169e1;
-            font-size: 16px;
-            margin-bottom: 10px;
-        }
-        .meal-content {
-            color: #888;
-            font-size: 14px;
-            line-height: 1.5;
-        }
-        .meal-macros {
-            display: flex;
-            gap: 15px;
-            margin-top: 10px;
-            font-size: 12px;
-            color: #666;
-        }
-        .meal-macro {
-            display: flex;
-            align-items: center;
-        }
-        .macro-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            margin-right: 5px;
-        }
         input::-webkit-outer-spin-button,
         input::-webkit-inner-spin-button {
             -webkit-appearance: none;
@@ -187,8 +158,8 @@
             <div class="section-title">Profil personnel</div>
             
             <div class="radio-group">
-                <div class="radio-option active" onclick="selectGender('M')" data-gender="M">Homme</div>
-                <div class="radio-option" onclick="selectGender('F')" data-gender="F">Femme</div>
+                <button class="radio-option active" data-gender="M">Homme</button>
+                <button class="radio-option" data-gender="F">Femme</button>
             </div>
 
             <div class="input-group">
@@ -225,15 +196,9 @@
             <div class="section-title">Objectif</div>
             
             <div class="radio-group">
-                <div class="radio-option active" onclick="selectGoal('maintain')" data-goal="maintain">
-                    Maintien
-                </div>
-                <div class="radio-option" onclick="selectGoal('lose')" data-goal="lose">
-                    Perte de poids
-                </div>
-                <div class="radio-option" onclick="selectGoal('gain')" data-goal="gain">
-                    Prise de masse
-                </div>
+                <button class="radio-option active" data-goal="maintain">Maintien</button>
+                <button class="radio-option" data-goal="lose">Perte de poids</button>
+                <button class="radio-option" data-goal="gain">Prise de masse</button>
             </div>
 
             <div class="result-card">
@@ -274,145 +239,36 @@
                 </div>
             </div>
         </div>
-
-        <div class="section">
-            <div class="section-title">Suggestions de repas</div>
-            
-            <div class="meal-suggestion">
-                <div class="meal-title">Petit déjeuner (625 kcal)</div>
-                <div class="meal-content">
-                    Porridge d'avoine aux fruits rouges avec graines de chia
-                    et amandes, accompagné d'un yaourt grec
-                </div>
-                <div class="meal-macros">
-                    <div class="meal-macro">
-                        <div class="macro-dot protein"></div>
-                        25g P
-                    </div>
-                    <div class="meal-macro">
-                        <div class="macro-dot carbs"></div>
-                        78g G
-                    </div>
-                    <div class="meal-macro">
-                        <div class="macro-dot fats"></div>
-                        14g L
-                    </div>
-                </div>
-            </div>
-
-            <div class="meal-suggestion">
-                <div class="meal-title">Déjeuner (750 kcal)</div>
-                <div class="meal-content">
-                    Poulet grillé avec quinoa et légumes rôtis,
-                    sauce à base d'huile d'olive et citron
-                </div>
-                <div class="meal-macros">
-                    <div class="meal-macro">
-                        <div class="macro-dot protein"></div>
-                        45g P
-                    </div>
-                    <div class="meal-macro">
-                        <div class="macro-dot carbs"></div>
-                        85g G
-                    </div>
-                    <div class="meal-macro">
-                        <div class="macro-dot fats"></div>
-                        18g L
-                    </div>
-                </div>
-            </div>
-
-            <div class="meal-suggestion">
-                <div class="meal-title">Dîner (625 kcal)</div>
-                <div class="meal-content">
-                    Saumon au four avec patates douces et épinards,
-                    assaisonnement aux herbes
-                </div>
-                <div class="meal-macros">
-                    <div class="meal-macro">
-                        <div class="macro-dot protein"></div>
-                        35g P
-                    </div>
-                    <div class="meal-macro">
-                        <div class="macro-dot carbs"></div>
-                        65g G
-                    </div>
-                    <div class="meal-macro">
-                        <div class="macro-dot fats"></div>
-                        15g L
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="section">
-            <div class="section-title">Répartition des collations</div>
-            
-            <div class="meal-suggestion">
-                <div class="meal-title">Collation matin (250 kcal)</div>
-                <div class="meal-content">
-                    Smoothie protéiné banane-beurre de cacahuète
-                </div>
-                <div class="meal-macros">
-                    <div class="meal-macro">
-                        <div class="macro-dot protein"></div>
-                        15g P
-                    </div>
-                    <div class="meal-macro">
-                        <div class="macro-dot carbs"></div>
-                        35g G
-                    </div>
-                    <div class="meal-macro">
-                        <div class="macro-dot fats"></div>
-                        8g L
-                    </div>
-                </div>
-            </div>
-
-            <div class="meal-suggestion">
-                <div class="meal-title">Collation après-midi (250 kcal)</div>
-                <div class="meal-content">
-                    Yaourt grec avec fruits secs et miel
-                </div>
-                <div class="meal-macros">
-                    <div class="meal-macro">
-                        <div class="macro-dot protein"></div>
-                        20g P
-                    </div>
-                    <div class="meal-macro">
-                        <div class="macro-dot carbs"></div>
-                        30g G
-                    </div>
-                    <div class="meal-macro">
-                        <div class="macro-dot fats"></div>
-                        7g L
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 
     <script>
         let currentGender = 'M';
         let currentGoal = 'maintain';
 
-        function selectGender(gender) {
-            currentGender = gender;
-            document.querySelectorAll('[data-gender]').forEach(option => {
-                option.classList.remove('active');
+        // Gestion des boutons de genre
+        document.querySelectorAll('[data-gender]').forEach(button => {
+            button.addEventListener('click', function() {
+                document.querySelectorAll('[data-gender]').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                currentGender = this.dataset.gender;
+                calculateCalories();
             });
-            document.querySelector(`[data-gender="${gender}"]`).classList.add('active');
-            calculateCalories();
-        }
+        });
 
-        function selectGoal(goal) {
-            currentGoal = goal;
-            document.querySelectorAll('[data-goal]').forEach(option => {
-                option.classList.remove('active');
+        // Gestion des boutons d'objectif
+        document.querySelectorAll('[data-goal]').forEach(button => {
+            button.addEventListener('click', function() {
+                document.querySelectorAll('[data-goal]').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                currentGoal = this.dataset.goal;
+                calculateCalories();
             });
-            document.querySelector(`[data-goal="${goal}"]`).classList.add('active');
-            calculateCalories();
-        }
+        });
+
+        // Gestion des inputs
+        document.querySelectorAll('input, select').forEach(input => {
+            input.addEventListener('input', calculateCalories);
+        });
 
         function calculateBMR(weight, height, age, gender) {
             if (gender === 'M') {
@@ -425,4 +281,43 @@
         function calculateCalories() {
             const weight = parseFloat(document.getElementById('weight').value) || 70;
             const height = parseFloat(document.getElementById('height').value) || 170;
-            
+            const age = parseFloat(document.getElementById('age').value) || 30;
+            const activity = parseFloat(document.getElementById('activity').value) || 1.55;
+
+            // Calcul du BMR et TDEE
+            let bmr = calculateBMR(weight, height, age, currentGender);
+            let tdee = bmr * activity;
+
+            // Ajustement selon l'objectif
+            let calories = tdee;
+            switch(currentGoal) {
+                case 'lose':
+                    calories = tdee - 500; // Déficit de 500 kcal pour perte de poids
+                    break;
+                case 'gain':
+                    calories = tdee + 300; // Surplus de 300 kcal pour prise de masse
+                    break;
+            }
+
+            // Calcul des macronutriments
+            const proteins = weight * 2; // 2g par kg de poids corporel
+            const fats = (calories * 0.25) / 9; // 25% des calories en lipides
+            const carbs = (calories - (proteins * 4) - (fats * 9)) / 4; // Le reste en glucides
+
+            // Mise à jour de l'affichage
+            document.getElementById('dailyCalories').textContent = Math.round(calories);
+            document.getElementById('proteins').textContent = Math.round(proteins);
+            document.getElementById('carbs').textContent = Math.round(carbs);
+            document.getElementById('fats').textContent = Math.round(fats);
+
+            // Mise à jour des barres de progression
+            document.getElementById('proteinBar').style.width = `${(proteins * 4 / calories) * 100}%`;
+            document.getElementById('carbsBar').style.width = `${(carbs * 4 / calories) * 100}%`;
+            document.getElementById('fatsBar').style.width = `${(fats * 9 / calories) * 100}%`;
+        }
+
+        // Calcul initial
+        calculateCalories();
+    </script>
+</body>
+</html>
